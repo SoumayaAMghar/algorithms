@@ -11,23 +11,25 @@
 <body>
 <script>
 
-console.log("Welcome to Programiz!");
+console.log("Welcome SOMA!");
 
 class Node {
-	// constructor
-	constructor(element) {
+// constructor
+	constructor(element) 
+	{
 		this.element = element;
-		this.next = null
+		this.next = null;
 	}
 }
 // linkedlist class
 class LinkedList {
-	constructor() {
+	constructor() 
+	{
 		this.head = null;
 		this.size = 0;
 	}
 
-    // adds an element at the end of list
+// adds an element at the end of list
  add(element)
 {
 		// creates a new node
@@ -42,28 +44,91 @@ class LinkedList {
 			this.head = node;
 		else {
 			current = this.head;
-
-			// iterate to the end of the
-			// list
-			while (current.next) {
+		// iterate to the end of the list
+			while (current.next) 
+			{
 				current = current.next;
 			}
 
-			// add node
+		// add node
 			current.next = node;
 		}
 		this.size++;
 	}
-    // prints the list items
-    printList() {
+// prints the list items
+printList() 
+{
         var curr = this.head;
         var str = "";
-        while (curr) {
+        while (curr) 
+		{
             str += curr.element + " ";
             curr = curr.next;
         }
         console.log(str);
-    }
+}
+// removes an element from the
+// specified location
+removeFrom(index)
+{
+	if (index < 0 || index >= this.size)
+		return console.log("Please Enter a valid index");
+	else 
+	{
+		var curr, prev, it = 0;
+		curr = this.head;
+		prev = curr;
+
+		// deleting first element
+		if (index === 0) {
+			this.head = curr.next;
+		} else {
+		// iterate over the list to the
+		// position to removce an element
+		while (it < index) 
+			{
+				it++;
+				prev = curr;
+				curr = curr.next;
+			}
+
+		// remove the element
+			prev.next = curr.next;
+		}
+		this.size--;
+
+		// return the remove element
+		return curr.element;
+	}
+}
+// removes a given element from the
+// list
+removeElement(element)
+{
+	var current = this.head;
+	var prev = null;
+
+	// iterate over the list
+	while (current != null) {
+	// comparing element with current
+	// element if found then remove the
+	// and return true
+	if (current.element === element) {
+		if (prev == null) {
+			this.head = current.next;
+			} else {
+				prev.next = current.next;
+			}
+			this.size--;
+			return current.element;
+		}
+		prev = current;
+		current = current.next;
+	}
+	return -1;
+}
+
+
  
 }
 
@@ -84,9 +149,20 @@ ll.add(50);
 // prints 10 20 30 40 50
 ll.printList();
 
- 
+// prints 50 from the list
+console.log("is element removed ?" + ll.removeElement(50));
 
-    </script>
+// prints 10 20 30 40
+ll.printList();
+
+// remove 3rd element from the list
+console.log(ll.removeFrom(2));
+
+// prints 10 20 40
+ll.printList();
+
+ 
+</script>
  
 
 </body>
